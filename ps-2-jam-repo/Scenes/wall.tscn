@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://fkj0enfbxmjn"]
+
+[ext_resource type="PackedScene" uid="uid://cpbjr3wua56ox" path="res://Scenes/wall-textured.tscn" id="1_d155t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_htemk"]
+size = Vector3(0.25, 2.5, 2)
+
+[node name="Wall" type="StaticBody3D" unique_id=775952640]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=865746133]
+shape = SubResource("BoxShape3D_htemk")
+
+[node name="Wall" parent="." unique_id=1103131510 instance=ExtResource("1_d155t")]

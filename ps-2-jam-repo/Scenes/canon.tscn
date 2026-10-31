@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://d1cp4faa8k5nt"]
+
+[ext_resource type="PackedScene" uid="uid://qhnxlv3togqx" path="res://Assets/Canon.blend" id="1_0jbhj"]
+[ext_resource type="Material" uid="uid://sekaebf8vy21" path="res://Materials/Red metal.tres" id="2_h5dys"]
+[ext_resource type="Script" uid="uid://b3uxxc3vuqdk" path="res://Scripts/canon.gd" id="2_x2mam"]
+[ext_resource type="PackedScene" uid="uid://ddpmfdv8ruoqe" path="res://Scenes/impact.tscn" id="3_nsfx8"]
+[ext_resource type="Material" uid="uid://cnv1yghqnueo2" path="res://Materials/Glow blue.tres" id="3_x2mam"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_htemk"]
+top_radius = 1.1567383
+bottom_radius = 1.1567383
+height = 9.777832
+
+[node name="Canon" unique_id=1364507837 instance=ExtResource("1_0jbhj")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+script = ExtResource("2_x2mam")
+impact_scene = ExtResource("3_nsfx8")
+
+[node name="Barrel" parent="." index="0" unique_id=65397717]
+material_override = ExtResource("2_h5dys")
+
+[node name="Charge" type="MeshInstance3D" parent="." index="1" unique_id=747292145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.19702148, 0)
+material_override = ExtResource("3_x2mam")
+mesh = SubResource("CylinderMesh_htemk")
+
+[node name="MuzzlePoint" type="Marker3D" parent="." index="2" unique_id=952861180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.877841, 0)
+
+[node name="MuzzleFlash" type="OmniLight3D" parent="." index="3" unique_id=1774739448]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -5.9782696, 0)
+visible = false
+light_color = Color(0, 0.7490196, 1, 1)
+light_energy = 5.0
+omni_range = 3.0

@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cnv1yghqnueo2"]
+
+[resource]
+metallic = 0.31
+roughness = 0.25
+emission_enabled = true
+emission = Color(0.14244285, 0.38373613, 0.99999684, 1)
+emission_energy_multiplier = 3.0
+ao_enabled = true
+ao_light_affect = 1.0

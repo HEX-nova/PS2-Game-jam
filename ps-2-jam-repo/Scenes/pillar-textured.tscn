@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b0814yveebqna"]
+
+[ext_resource type="PackedScene" uid="uid://2xpl5sp5upwk" path="res://Assets/Pillar.blend" id="1_kruwa"]
+[ext_resource type="Material" uid="uid://b5ld4flw3y881" path="res://Materials/walls.tres" id="2_njuyq"]
+
+[node name="Pillar" unique_id=2102292136 instance=ExtResource("1_kruwa")]
+
+[node name="Cube" parent="." index="0" unique_id=205538980]
+material_override = ExtResource("2_njuyq")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b6aekfnv4r4n2"]
+
+[ext_resource type="PackedScene" uid="uid://djefer4afy10p" path="res://Scenes/floor-textured.tscn" id="1_nvnu3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_htemk"]
+size = Vector3(2, 0.25, 2)
+
+[node name="Floor" type="StaticBody3D" unique_id=129094763]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1320083951]
+shape = SubResource("BoxShape3D_htemk")
+
+[node name="Floor" parent="." unique_id=214343549 instance=ExtResource("1_nvnu3")]

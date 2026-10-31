@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bjhn5tnuhy3fd"]
+
+[ext_resource type="Script" uid="uid://cum8rpukmvl5g" path="res://Scripts/level.gd" id="1_tumq0"]
+[ext_resource type="PackedScene" uid="uid://c4cb1qa4qduhu" path="res://Scenes/turret.tscn" id="2_0f350"]
+[ext_resource type="PackedScene" uid="uid://b6aekfnv4r4n2" path="res://Scenes/floor.tscn" id="2_81xng"]
+[ext_resource type="PackedScene" uid="uid://fkj0enfbxmjn" path="res://Scenes/wall.tscn" id="3_wqkje"]
+[ext_resource type="PackedScene" uid="uid://h4nl5in3skkw" path="res://Scenes/pillar.tscn" id="4_0f350"]
+[ext_resource type="PackedScene" uid="uid://cg7gkoxwrrggn" path="res://Scenes/player.tscn" id="5_wqkje"]
+
+[sub_resource type="Environment" id="Environment_htemk"]
+background_color = Color(0.5368971, 0.65327245, 1, 1)
+ambient_light_source = 1
+ambient_light_color = Color(0.5135624, 0.59858924, 1, 1)
+ambient_light_sky_contribution = 0.1
+ambient_light_energy = 0.1
+glow_enabled = true
+glow_intensity = 0.2
+glow_bloom = 1.0
+glow_hdr_threshold = 0.4
+glow_hdr_scale = 4.0
+glow_hdr_luminance_cap = 3.21
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.7934134, 0.7934134, 0.79341334, 1)
+fog_density = 5.0
+fog_depth_curve = 0.4061262
+fog_depth_begin = 2.0
+volumetric_fog_density = 1.0
+volumetric_fog_albedo = Color(0.74837965, 0.74837965, 0.74837965, 1)
+volumetric_fog_length = 24.0
+
+[node name="Level" type="Node3D" unique_id=1470024260]
+script = ExtResource("1_tumq0")
+size = Vector2i(20, 20)
+target_tiles = 100
+turret_scene = ExtResource("2_0f350")
+tile_scene = ExtResource("2_81xng")
+wall_scene = ExtResource("3_wqkje")
+pillar_scene = ExtResource("4_0f350")
+player_scene = ExtResource("5_wqkje")
+player_spawn_height = 2.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2056044181]
+transform = Transform3D(1, 0, 0, 0, 0.57357645, 0.81915206, 0, -0.81915206, 0.57357645, 0, 0, 0)
+light_energy = 2.0
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 1.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1557198260]
+environment = SubResource("Environment_htemk")

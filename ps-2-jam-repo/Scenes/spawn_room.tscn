@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b84lvftrriwls"]
+
+[ext_resource type="PackedScene" uid="uid://cxu7l2k4yks1x" path="res://Assets/Spawn room.blend" id="1_xe6md"]
+
+[node name="Spawn room" type="Node3D" unique_id=716937178]
+
+[node name="Spawn room" parent="." unique_id=2146601285 instance=ExtResource("1_xe6md")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.056511283, 0, 0.14664197)

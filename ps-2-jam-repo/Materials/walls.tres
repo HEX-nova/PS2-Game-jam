@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b5ld4flw3y881"]
+
+[ext_resource type="Texture2D" uid="uid://cach6od568yfc" path="res://Assets/textures/StoneFloor_basecolor.jpg" id="1_xwwti"]
+[ext_resource type="Texture2D" uid="uid://dqcknis1ceqkx" path="res://Assets/textures/StoneFloor_height.jpg" id="2_s5mlk"]
+[ext_resource type="Texture2D" uid="uid://b2h0pltckt0e6" path="res://Assets/textures/StoneFloor_normal.jpg" id="3_7fhvm"]
+[ext_resource type="Texture2D" uid="uid://fls4vkv6m8nn" path="res://Assets/textures/StoneFloor_roughness.jpg" id="4_1jv8a"]
+
+[resource]
+albedo_texture = ExtResource("1_xwwti")
+roughness_texture = ExtResource("4_1jv8a")
+normal_enabled = true
+normal_texture = ExtResource("3_7fhvm")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_s5mlk")

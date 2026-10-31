@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cg7gkoxwrrggn"]
+
+[ext_resource type="Script" uid="uid://cqko7vd1m8tos" path="res://Scripts/player.gd" id="1_v0iea"]
+[ext_resource type="PackedScene" uid="uid://d1cp4faa8k5nt" path="res://Scenes/canon.tscn" id="2_cvnsp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_htemk"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1507210470 groups=["Player"]]
+collision_mask = 6
+script = ExtResource("1_v0iea")
+speed = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=182374885]
+shape = SubResource("BoxShape3D_htemk")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1931629978]
+
+[node name="Weapon holder" type="Node3D" parent="Camera3D" unique_id=195401848]
+
+[node name="Canon" parent="Camera3D/Weapon holder" unique_id=1364507837 groups=["Player"] instance=ExtResource("2_cvnsp")]
+transform = Transform3D(0.05, 0, 0, 0, 2.3613173e-05, -0.049999993, 0, 0.049999993, 2.3613173e-05, 0.28817195, 0, -0.5592353)
+fire_rate = 0.1

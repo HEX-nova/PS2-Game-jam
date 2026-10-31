@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://djefer4afy10p"]
+
+[ext_resource type="PackedScene" uid="uid://hyw1h1kebumk" path="res://Assets/Floor.blend" id="1_e0taa"]
+[ext_resource type="Material" uid="uid://b5ld4flw3y881" path="res://Materials/walls.tres" id="2_msofy"]
+
+[node name="Floor" unique_id=214343549 instance=ExtResource("1_e0taa")]
+
+[node name="Cube" parent="." index="0" unique_id=486328444]
+material_override = ExtResource("2_msofy")
