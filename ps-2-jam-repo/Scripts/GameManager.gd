@@ -20,6 +20,13 @@ signal player_died
 
 var max_health: float = 100.0
 var health: float = 100.0
+var health_regen = 5.0
+
+var attack: float = 20.0
+
+var max_energy: float = 100.0
+var energy: float = 100.0
+var energy_regen = 20.0
 
 var is_dead: bool = false
 var invulnerability_timer: float = 0.0
@@ -69,6 +76,7 @@ func increase_max_health(amount: float) -> void:
 
 func respawn() -> void:
 	health = max_health
+	energy = max_energy
 	is_dead = false
 
 	health_changed.emit(health, max_health)
@@ -141,3 +149,9 @@ func reset_run() -> void:
 func _process(delta: float) -> void:
 	if invulnerability_timer > 0.0:
 		invulnerability_timer -= delta
+	
+	if health < max_health:
+		health += health_regen * delta
+	
+	if energy < max_energy:
+		energy += energy_regen * delta

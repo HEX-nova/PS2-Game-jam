@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://fkj0enfbxmjn" path="res://Scenes/wall.tscn" id="3_wqkje"]
 [ext_resource type="PackedScene" uid="uid://h4nl5in3skkw" path="res://Scenes/pillar.tscn" id="4_0f350"]
 [ext_resource type="PackedScene" uid="uid://cg7gkoxwrrggn" path="res://Scenes/player.tscn" id="5_wqkje"]
+[ext_resource type="PackedScene" uid="uid://cq3f68hq5ysq4" path="res://Scenes/mui.tscn" id="7_8c0lf"]
 
 [sub_resource type="Environment" id="Environment_htemk"]
 background_color = Color(0.5368971, 0.65327245, 1, 1)
@@ -13,13 +14,11 @@ ambient_light_source = 1
 ambient_light_color = Color(0.5135624, 0.59858924, 1, 1)
 ambient_light_sky_contribution = 0.1
 ambient_light_energy = 0.1
-glow_enabled = true
 glow_intensity = 0.2
 glow_bloom = 1.0
 glow_hdr_threshold = 0.4
 glow_hdr_scale = 4.0
 glow_hdr_luminance_cap = 3.21
-fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.7934134, 0.7934134, 0.79341334, 1)
 fog_density = 5.0
@@ -33,6 +32,7 @@ volumetric_fog_length = 24.0
 script = ExtResource("1_tumq0")
 size = Vector2i(20, 20)
 target_tiles = 100
+current_level = 6
 turret_scene = ExtResource("2_0f350")
 tile_scene = ExtResource("2_81xng")
 wall_scene = ExtResource("3_wqkje")
@@ -48,3 +48,7 @@ light_volumetric_fog_energy = 1.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1557198260]
 environment = SubResource("Environment_htemk")
+
+[node name="MUI" parent="." unique_id=1798563748 instance=ExtResource("7_8c0lf")]
+
+[editable path="MUI"]

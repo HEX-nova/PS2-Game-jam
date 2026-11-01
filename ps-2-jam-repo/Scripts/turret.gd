@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 
 	var target_pos := target_player.global_position
 
-	# YAW: Rotate toward the player.
+	# Rotate toward the player.
 	var horizontal_target := Vector3(
 		target_pos.x,
 		axis.global_position.y,
@@ -48,18 +48,15 @@ func _process(delta: float) -> void:
 		fire_lightning()
 		fire_timer = fire_interval
 
-
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Player"):
 		target_player = body
 		print("Target acquired: Player spotted!")
 
-
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body == target_player:
 		target_player = null
 		print("Target lost!")
-
 
 func fire_lightning() -> void:
 	print("FIRING LIGHTNING!")

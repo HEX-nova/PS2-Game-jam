@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dsdcdnu2u5pu0"]
+
+[ext_resource type="PackedScene" uid="uid://ca1rwmtlj4vdc" path="res://Assets/Enemy 01.blend" id="1_h33fn"]
+
+[node name="Spider" type="Node3D" unique_id=843107937]
+
+[node name="Enemy 01" parent="." unique_id=2042785574 instance=ExtResource("1_h33fn")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="AnimationPlayer" parent="Enemy 01" index="1" unique_id=1435764464]
+autoplay = &"ArmatureAction"
+
+[editable path="Enemy 01"]

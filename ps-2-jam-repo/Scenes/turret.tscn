@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c56ey5wjncupy" path="res://Scripts/turret.gd" id="1_hskch"]
 [ext_resource type="Material" uid="uid://sekaebf8vy21" path="res://Materials/Red metal.tres" id="2_6spbj"]
 [ext_resource type="PackedScene" uid="uid://c7x8e1riu88oh" path="res://Scenes/lightning_bolt.tscn" id="2_pulj5"]
+[ext_resource type="PackedScene" uid="uid://dajn8ehrpbecv" path="res://Scenes/enemy_component.tscn" id="4_pulj5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bp530"]
 
@@ -107,10 +108,15 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_077ya")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_htemk"]
-radius = 10.0
+radius = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_htemk"]
+height = 0.65844727
+radius = 0.2631836
 
 [node name="Turret" type="Node3D" unique_id=1204938039 groups=["Enemy"]]
 script = ExtResource("1_hskch")
+rotation_speed = 1.0
 lightning_scene = ExtResource("2_pulj5")
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=235822086]
@@ -136,6 +142,16 @@ collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=536451079]
 shape = SubResource("SphereShape3D_htemk")
+
+[node name="DamageDetector" type="StaticBody3D" parent="." unique_id=663140851 groups=["Enemy"]]
+collision_layer = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageDetector" unique_id=934567137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25720215, 0)
+shape = SubResource("CylinderShape3D_htemk")
+
+[node name="EnemyComponent" parent="." unique_id=1253727785 instance=ExtResource("4_pulj5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

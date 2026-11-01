@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://cq3f68hq5ysq4"]
+
+[ext_resource type="Script" uid="uid://chdqplkkptqub" path="res://Scripts/mui.gd" id="1_soxlw"]
+[ext_resource type="Texture2D" uid="uid://dfnoelogkbv14" path="res://Sprites/MUI sprite - progress - under.png" id="2_msyhh"]
+[ext_resource type="Texture2D" uid="uid://bvq2bl12cupe2" path="res://Sprites/MUI sprite - progress - over.png" id="3_s6tca"]
+[ext_resource type="Texture2D" uid="uid://c4svwbhm3dnha" path="res://Sprites/MUI sprite - progress - progress.png" id="4_oix25"]
+[ext_resource type="Texture2D" uid="uid://c2ylloxoes1ow" path="res://Sprites/Crossair.png" id="5_msyhh"]
+[ext_resource type="Texture2D" uid="uid://crjrhoxhjjd3u" path="res://Sprites/MUI sprite - progress - progress energy.png" id="5_s6tca"]
+
+[node name="MUI" type="CanvasLayer" unique_id=1798563748]
+script = ExtResource("1_soxlw")
+
+[node name="User Stats" type="Control" parent="." unique_id=485717723]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 90.0
+offset_bottom = 90.0
+
+[node name="Health bar" type="TextureProgressBar" parent="User Stats" unique_id=701996972]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_under = ExtResource("2_msyhh")
+texture_over = ExtResource("3_s6tca")
+texture_progress = ExtResource("4_oix25")
+
+[node name="Health value" type="Label" parent="User Stats" unique_id=416674107]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 5.0
+anchor_bottom = 1.8750001
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Energy bar" type="TextureProgressBar" parent="User Stats" unique_id=1312038499]
+layout_mode = 0
+offset_top = 87.0
+offset_right = 40.0
+offset_bottom = 127.0
+texture_under = ExtResource("2_msyhh")
+texture_over = ExtResource("3_s6tca")
+texture_progress = ExtResource("5_s6tca")
+
+[node name="Energy value" type="Label" parent="User Stats" unique_id=1342344313]
+layout_mode = 0
+offset_top = 87.0
+offset_right = 200.0
+offset_bottom = 162.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crossair" type="Control" parent="." unique_id=265037070]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Crossair" unique_id=1069772410]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 475.0
+offset_bottom = 475.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+mouse_filter = 2
+texture = ExtResource("5_msyhh")
+
+[node name="Level indicator" type="Control" parent="." unique_id=1914292965]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 50.0
+offset_right = 20.0
+offset_bottom = 90.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+
+[node name="Label" type="Label" parent="Level indicator" unique_id=1397953615]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
