@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cum8rpukmvl5g" path="res://Scripts/level.gd" id="1_tumq0"]
 [ext_resource type="PackedScene" uid="uid://c4cb1qa4qduhu" path="res://Scenes/turret.tscn" id="2_0f350"]
 [ext_resource type="PackedScene" uid="uid://b6aekfnv4r4n2" path="res://Scenes/floor.tscn" id="2_81xng"]
+[ext_resource type="PackedScene" uid="uid://v7mgqx5k0h0e" path="res://Scenes/spider_cube.tscn" id="3_754fn"]
 [ext_resource type="PackedScene" uid="uid://fkj0enfbxmjn" path="res://Scenes/wall.tscn" id="3_wqkje"]
 [ext_resource type="PackedScene" uid="uid://h4nl5in3skkw" path="res://Scenes/pillar.tscn" id="4_0f350"]
 [ext_resource type="PackedScene" uid="uid://cg7gkoxwrrggn" path="res://Scenes/player.tscn" id="5_wqkje"]
@@ -19,6 +20,7 @@ glow_bloom = 1.0
 glow_hdr_threshold = 0.4
 glow_hdr_scale = 4.0
 glow_hdr_luminance_cap = 3.21
+fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.7934134, 0.7934134, 0.79341334, 1)
 fog_density = 5.0
@@ -32,8 +34,9 @@ volumetric_fog_length = 24.0
 script = ExtResource("1_tumq0")
 size = Vector2i(20, 20)
 target_tiles = 100
-current_level = 6
 turret_scene = ExtResource("2_0f350")
+spider_scene = ExtResource("3_754fn")
+enemy_count = 6
 tile_scene = ExtResource("2_81xng")
 wall_scene = ExtResource("3_wqkje")
 pillar_scene = ExtResource("4_0f350")
@@ -45,6 +48,9 @@ transform = Transform3D(1, 0, 0, 0, 0.57357645, 0.81915206, 0, -0.81915206, 0.57
 light_energy = 2.0
 light_indirect_energy = 5.0
 light_volumetric_fog_energy = 1.5
+shadow_enabled = true
+shadow_opacity = 0.32
+shadow_blur = 2.53
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1557198260]
 environment = SubResource("Environment_htemk")

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://2hc3i84immwd"]
+
+[ext_resource type="Script" uid="uid://b8fixn14v4wbq" path="res://Scripts/cube_projectile.gd" id="1_in51q"]
+[ext_resource type="Material" uid="uid://cnv1yghqnueo2" path="res://Materials/Glow blue.tres" id="2_xrdqi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_htemk"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_htemk"]
+size = Vector3(0.125, 0.125, 0.125)
+
+[node name="CubeProjectile" type="Area3D" unique_id=747727538]
+collision_layer = 8
+script = ExtResource("1_in51q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=118821858]
+shape = SubResource("BoxShape3D_htemk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1504369278]
+material_override = ExtResource("2_xrdqi")
+mesh = SubResource("BoxMesh_htemk")

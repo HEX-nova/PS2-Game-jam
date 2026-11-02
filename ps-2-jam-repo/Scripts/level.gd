@@ -12,6 +12,7 @@ extends Node3D
 
 @export_group("Enemies")
 @export var turret_scene: PackedScene
+@export var spider_scene: PackedScene
 @export var enemy_count: int = 3
 
 @export_group("Scenes")
@@ -27,6 +28,8 @@ var player_instance: CharacterBody3D
 var player_spawn_position: Vector3
 var start_cell: Vector2i
 var enemies_remaining: int = 0
+var turrets_remaining: int = 0
+var spiders_remaining: int = 0
 
 const TILE_SIZE := 2.0
 
@@ -161,7 +164,6 @@ func place_wall(pos: Vector3, rotation_y: float) -> void:
 	wall.position = pos + Vector3(0, 1.25, 0)
 	wall.rotation.y = rotation_y + PI / 2.0
 
-
 func spawn_player() -> void:
 	player_spawn_position = to_global(Vector3(
 		start_cell.x * TILE_SIZE,
@@ -183,45 +185,80 @@ func spawn_player() -> void:
 	player_instance.scale = Vector3(0.5, 0.5, 0.5)
 	add_child(player_instance)
 
-
 func spawn_enemies() -> void:
-	if turret_scene == null:
+	if turret_scene == null and spider_scene == null:
 		return
 
 	var available_cells: Array = dungeon.keys()
 	available_cells.erase(start_cell)
 	available_cells.shuffle()
 
-	var spawn_target = mini(enemy_count + current_level - 1, available_cells.size() - 50)
+	var spawn_target = mini(enemy_count + current_level - 1, available_cells.size())
 	enemies_remaining = spawn_target
 
+	# Reset specific counts for this level
+	turrets_remaining = 0
+	spiders_remaining = 0
+
+	var enemy_queue: Array[PackedScene] = []
+	
+	if turret_scene != null and spider_scene != null:
+		var guaranteed_count = min(2, spawn_target / 2)
+		for i in range(guaranteed_count):
+			enemy_queue.append(turret_scene)
+			enemy_queue.append(spider_scene)
+		
+		while enemy_queue.size() < spawn_target:
+			enemy_queue.append(turret_scene if randf() < 0.5 else spider_scene)
+	else:
+		var single_scene = turret_scene if turret_scene != null else spider_scene
+		for i in range(spawn_target):
+			enemy_queue.append(single_scene)
+
+	enemy_queue.shuffle()
+
 	for i in range(spawn_target):
-		var turret_cell: Vector2i = available_cells.pop_front()
+		var enemy_cell: Vector2i = available_cells.pop_front()
+		var chosen_scene: PackedScene = enemy_queue[i]
 
-		var turret := turret_scene.instantiate() as Node3D
-		generated_root.add_child(turret)
+		var enemy := chosen_scene.instantiate() as Node3D
+		
+		# Tag them or track them by scene type
+		if chosen_scene == turret_scene:
+			enemy.set_meta("enemy_type", "turret")
+			turrets_remaining += 1
+		else:
+			enemy.set_meta("enemy_type", "spider")
+			spiders_remaining += 1
 
-		turret.position = Vector3(
-			turret_cell.x * TILE_SIZE,
+		generated_root.add_child(enemy)
+		enemy.position = Vector3(
+			enemy_cell.x * TILE_SIZE,
 			0.0,
-			turret_cell.y * TILE_SIZE
+			enemy_cell.y * TILE_SIZE
 		)
+		enemy.tree_exited.connect(func(): _on_enemy_defeated(enemy))
 
-		turret.tree_exited.connect(_on_enemy_defeated)
-
-	print("Level ", current_level, " started with ", enemies_remaining, " enemies.")
+	print("Level ", current_level, " started! Turrets: ", turrets_remaining, " | Spiders: ", spiders_remaining)
 
 
-func _on_enemy_defeated() -> void:
+func _on_enemy_defeated(enemy_node: Node3D) -> void:
 	if not is_instance_valid(generated_root):
 		return
 
 	enemies_remaining -= 1
-	print("Enemy eliminated! Remaining: ", enemies_remaining)
+
+	# Check metadata to see which type died
+	if enemy_node.has_meta("enemy_type"):
+		if enemy_node.get_meta("enemy_type") == "turret":
+			turrets_remaining -= 1
+		else:
+			spiders_remaining -= 1
+
+	print("Enemy eliminated! Total left: ", enemies_remaining, " (Turrets: ", turrets_remaining, ", Spiders: ", spiders_remaining, ")")
 
 	if enemies_remaining <= 0:
 		advance_level()
-
 
 func advance_level() -> void:
 	current_level += 1
