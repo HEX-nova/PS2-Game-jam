@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="PS2 Jam Repo"
+run/main_scene="uid://cgxjdpyjx78vq"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,6 +28,10 @@ window/stretch/aspect="expand"
 
 Player=""
 Enemy=""
+
+[gui]
+
+theme/custom_font="uid://dxqwrbvwkbo0x"
 
 [input]
 

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b2xh6cmkxkg8l"]
+
+[ext_resource type="Script" uid="uid://d3vn07fw5y6tt" path="res://Scripts/teleporter.gd" id="1_uqvdf"]
+[ext_resource type="Texture2D" uid="uid://dgt5xgix0ujs0" path="res://Sprites/Portal.png" id="2_75k4i"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_htemk"]
+height = 0.15429688
+radius = 2.0058594
+
+[node name="Teleporter" type="Area3D" unique_id=1241856819]
+collision_layer = 2
+script = ExtResource("1_uqvdf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=482780125]
+transform = Transform3D(-4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 0, 0, 1, 0.0068359375, -2.988081e-10, 0)
+shape = SubResource("CylinderShape3D_htemk")
+debug_color = Color(0.9999996, 0.831825, 0.6919333, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1931978058]
+transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0, 0, 0)
+texture = ExtResource("2_75k4i")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
