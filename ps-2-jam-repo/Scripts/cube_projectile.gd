@@ -4,6 +4,8 @@ extends Area3D
 var travel_direction: Vector3 = Vector3.FORWARD
 
 func _ready() -> void:
+	if GameManager.current_level >= 6:
+		collision_mask = 1
 	if not body_entered.is_connected(_on_body_entered):
 		body_entered.connect(_on_body_entered)
 	# Auto-destroy after 5 seconds so it doesn't leak memory

@@ -2,6 +2,7 @@
 extends CharacterBody3D
 
 @export var speed: float = 5.0
+@export var jump: float = 10.0
 @export var mouse_sensitivity: float = 0.002
 
 @onready var camera: Camera3D = $Camera3D
@@ -52,5 +53,8 @@ func _physics_process(delta: float) -> void:
 	# Gravity
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
+	
+	if is_on_floor() and Input.is_action_pressed("ui_accept"):
+		velocity.y = jump
 
 	move_and_slide()

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://2wn1xgh7bl6n"
+path="res://.godot/imported/scorpion_body.obj-4b325d7ec5daebb14c6a20749dbd023f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/scorpion_body.obj-4b325d7ec5daebb14c6a20749dbd023f.mesh"]
+
+source_file="res://Assets/scorpion_body.obj"
+dest_files=["res://.godot/imported/scorpion_body.obj-4b325d7ec5daebb14c6a20749dbd023f.mesh", "res://.godot/imported/scorpion_body.obj-4b325d7ec5daebb14c6a20749dbd023f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

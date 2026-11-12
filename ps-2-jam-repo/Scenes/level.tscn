@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://v7mgqx5k0h0e" path="res://Scenes/spider_cube.tscn" id="3_754fn"]
 [ext_resource type="PackedScene" uid="uid://fkj0enfbxmjn" path="res://Scenes/wall.tscn" id="3_wqkje"]
 [ext_resource type="PackedScene" uid="uid://h4nl5in3skkw" path="res://Scenes/pillar.tscn" id="4_0f350"]
+[ext_resource type="PackedScene" uid="uid://2hc3i84immwd" path="res://Scenes/cube_projectile.tscn" id="4_bvt00"]
 [ext_resource type="PackedScene" uid="uid://cg7gkoxwrrggn" path="res://Scenes/player.tscn" id="5_wqkje"]
 [ext_resource type="PackedScene" uid="uid://cq3f68hq5ysq4" path="res://Scenes/mui.tscn" id="7_8c0lf"]
+[ext_resource type="Texture2D" uid="uid://1g8vi7bfljlx" path="res://Sprites/game_jam_UI_health_energy_bar.png" id="10_oqgf2"]
 
 [sub_resource type="Environment" id="Environment_htemk"]
 background_color = Color(0.5368971, 0.65327245, 1, 1)
@@ -30,12 +32,33 @@ volumetric_fog_density = 1.0
 volumetric_fog_albedo = Color(0.74837965, 0.74837965, 0.74837965, 1)
 volumetric_fog_length = 24.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwwj3"]
+atlas = ExtResource("10_oqgf2")
+region = Rect2(174.08093, 302.546, 352.4081, 54.258636)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha31o"]
+atlas = ExtResource("10_oqgf2")
+region = Rect2(174.86325, 141.33759, 352.67984, 55.058075)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oqgf2"]
+load_path = "res://.godot/imported/game_jam_UI_health_energy_bar.png-339fecb85b6fed081a7bf748fe46f5d9.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxfql"]
+atlas = SubResource("CompressedTexture2D_oqgf2")
+region = Rect2(174.08093, 302.546, 352.4081, 54.258636)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqgf2"]
+atlas = ExtResource("10_oqgf2")
+region = Rect2(174.90784, 222.39514, 352.63055, 54.85605)
+
 [node name="Level" type="Node3D" unique_id=1470024260]
 script = ExtResource("1_tumq0")
 size = Vector2i(20, 20)
 target_tiles = 100
+current_level = 1
 turret_scene = ExtResource("2_0f350")
 spider_scene = ExtResource("3_754fn")
+spider_projectiles = ExtResource("4_bvt00")
 enemy_count = 6
 tile_scene = ExtResource("2_81xng")
 wall_scene = ExtResource("3_wqkje")
@@ -56,5 +79,30 @@ shadow_blur = 2.53
 environment = SubResource("Environment_htemk")
 
 [node name="MUI" parent="." unique_id=1798563748 instance=ExtResource("7_8c0lf")]
+
+[node name="Health bar" parent="MUI/User Stats" parent_id_path=PackedInt32Array(1798563748, 485717723) index="0" unique_id=701996972]
+texture_under = SubResource("AtlasTexture_nwwj3")
+texture_over = null
+texture_progress = SubResource("AtlasTexture_ha31o")
+
+[node name="Health value" parent="MUI/User Stats" parent_id_path=PackedInt32Array(1798563748, 485717723) index="1" unique_id=416674107]
+anchor_right = 8.825001
+anchor_bottom = 1.3750001
+offset_right = -3.0517578e-05
+
+[node name="Energy bar" parent="MUI/User Stats" parent_id_path=PackedInt32Array(1798563748, 485717723) index="2" unique_id=1312038499]
+texture_under = SubResource("AtlasTexture_qxfql")
+texture_over = null
+texture_progress = SubResource("AtlasTexture_oqgf2")
+
+[node name="Energy value" parent="MUI/User Stats" parent_id_path=PackedInt32Array(1798563748, 485717723) index="3" unique_id=1342344313]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 2.1750002
+anchor_right = 8.8
+anchor_bottom = 3.525
+offset_top = -7.6293945e-06
+offset_right = 0.0
+offset_bottom = 0.0
 
 [editable path="MUI"]

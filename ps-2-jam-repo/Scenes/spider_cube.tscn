@@ -1,66 +1,68 @@
 [gd_scene format=3 uid="uid://v7mgqx5k0h0e"]
 
 [ext_resource type="Script" uid="uid://dtirlhxa7te5u" path="res://Scripts/spider_cube.gd" id="1_g5gmj"]
-[ext_resource type="Material" uid="uid://cnv1yghqnueo2" path="res://Materials/Glow blue.tres" id="2_i1j5w"]
 [ext_resource type="PackedScene" uid="uid://2hc3i84immwd" path="res://Scenes/cube_projectile.tscn" id="2_qngml"]
 [ext_resource type="PackedScene" uid="uid://dajn8ehrpbecv" path="res://Scenes/enemy_component.tscn" id="3_i1j5w"]
+[ext_resource type="Material" uid="uid://6av3854nudwq" path="res://Materials/Green metal.tres" id="3_qngml"]
+[ext_resource type="ArrayMesh" uid="uid://2wn1xgh7bl6n" path="res://Assets/scorpion_body.obj" id="4_3u4pu"]
+[ext_resource type="ArrayMesh" uid="uid://4bpxacahrs5j" path="res://Assets/scorpion_leg.obj" id="6_616b2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_htemk"]
-size = Vector3(1.5, 1.5, 1.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_htemk"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_14cdr"]
-size = Vector3(0.25, 0.75, 0.25)
+size = Vector3(1.5, 2.3718262, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_14cdr"]
 size = Vector3(2, 2, 2)
 
 [node name="SpiderCube" type="CharacterBody3D" unique_id=1997365008 groups=["Enemy"]]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, 0)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_g5gmj")
 speed = 0.5
+rotation_speed = 2.0
 projectile_scene = ExtResource("2_qngml")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2122073416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4359131, 0)
 shape = SubResource("BoxShape3D_htemk")
 
 [node name="BodyMesh" type="MeshInstance3D" parent="." unique_id=1206523329]
-material_override = ExtResource("2_i1j5w")
-mesh = SubResource("BoxMesh_htemk")
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, -0.003)
+material_override = ExtResource("3_qngml")
+mesh = ExtResource("4_3u4pu")
 
 [node name="ProjectileSpawner" type="Marker3D" parent="." unique_id=1556338465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="EnemyComponent" parent="." unique_id=1253727785 instance=ExtResource("3_i1j5w")]
+health = 50.0
+max_health = 50.0
 
 [node name="Legs" type="Node3D" parent="." unique_id=980184952]
 
 [node name="Leg1" type="MeshInstance3D" parent="Legs" unique_id=1676234420]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 1)
-mesh = SubResource("BoxMesh_14cdr")
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.25, -1, 0.5)
+mesh = ExtResource("6_616b2")
 
 [node name="Leg2" type="MeshInstance3D" parent="Legs" unique_id=1580651273]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1)
-mesh = SubResource("BoxMesh_14cdr")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -1, 0.5)
+mesh = ExtResource("6_616b2")
 
 [node name="Leg3" type="MeshInstance3D" parent="Legs" unique_id=359497415]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
-mesh = SubResource("BoxMesh_14cdr")
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.25, -1, 0)
+mesh = ExtResource("6_616b2")
 
 [node name="Leg4" type="MeshInstance3D" parent="Legs" unique_id=465421845]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
-mesh = SubResource("BoxMesh_14cdr")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -1, 0)
+mesh = ExtResource("6_616b2")
 
 [node name="Leg5" type="MeshInstance3D" parent="Legs" unique_id=774721597]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, -1)
-mesh = SubResource("BoxMesh_14cdr")
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.25, -1, -0.5)
+mesh = ExtResource("6_616b2")
 
 [node name="Leg6" type="MeshInstance3D" parent="Legs" unique_id=753289188]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, -1)
-mesh = SubResource("BoxMesh_14cdr")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -1, -0.5)
+mesh = ExtResource("6_616b2")
 
 [node name="DamageDetector" type="StaticBody3D" parent="." unique_id=1924011917]
 collision_layer = 4

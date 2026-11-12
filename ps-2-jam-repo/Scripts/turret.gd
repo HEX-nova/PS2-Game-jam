@@ -3,7 +3,8 @@ extends Node3D
 
 @export var rotation_speed: float = 5.0
 @export var lightning_scene: PackedScene
-@export var lightning_damage: int = 20
+@export var base_lightning_damage: int = 15
+var lightning_damage: int
 
 @onready var axis: Node3D = $Axis
 @onready var barrel: Node3D = $Axis/Barrel
@@ -11,8 +12,13 @@ extends Node3D
 @onready var lightning_spawn: Marker3D = $"Axis/Barrel/Lightning Spawn"
 
 var target_player: Node3D = null
-@export var fire_interval: float = 1.5
+@export var base_fire_interval: float = 1.5
+var fire_interval: float
 var fire_timer: float = 0.0
+
+func _ready() -> void:
+	lightning_damage = base_lightning_damage + 5 * GameManager.current_level
+	fire_interval = base_fire_interval + 0.1 * (GameManager.current_level - 1)
 
 func _process(delta: float) -> void:
 	if not target_player:

@@ -17,26 +17,26 @@ signal player_died
 # ==========================================
 
 @export_group("Health")
-
 var max_health: float = 100.0
 var health: float = 100.0
 var health_regen = 5.0
-
 var attack: float = 20.0
-
 var max_energy: float = 100.0
 var energy: float = 100.0
 var energy_regen = 20.0
-
 var is_dead: bool = false
 var invulnerability_timer: float = 0.0
 
+@export_group("Enemies")
+var turrets_left: int
+var spiders_left: int
+
+var current_level: int = 1
 # ==========================================
 # PLAYER RESOURCES
 # ==========================================
 
 @export_group("Resources")
-
 var points: int = 0
 var coins: int = 0
 var experience: int = 0

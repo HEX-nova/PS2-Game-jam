@@ -6,13 +6,14 @@ extends Node3D
 @export var generate_on_ready: bool = true
 
 @export_group("Progression")
-@export var current_level: int = 1
+@export var current_level: int = GameManager.current_level
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
 @onready var level_indicator: Label = $"MUI/Level indicator/Label"
 
 @export_group("Enemies")
 @export var turret_scene: PackedScene
 @export var spider_scene: PackedScene
+@export var spider_projectiles: PackedScene
 @export var enemy_count: int = 3
 
 @export_group("Scenes")
@@ -45,6 +46,8 @@ var generated_root: Node3D
 
 
 func _ready() -> void:
+	GameManager.current_level = current_level
+	
 	add_to_group("DungeonManager")
 
 	if not GameManager.player_died.is_connected(_on_player_died):
@@ -165,6 +168,10 @@ func place_wall(pos: Vector3, rotation_y: float) -> void:
 	wall.rotation.y = rotation_y + PI / 2.0
 
 func spawn_player() -> void:
+	GameManager.max_health = 75 + 25 * GameManager.current_level
+	GameManager.max_energy = 75 + 15 * GameManager.current_level
+	GameManager.health = GameManager.max_health
+	GameManager.energy = GameManager.max_energy
 	player_spawn_position = to_global(Vector3(
 		start_cell.x * TILE_SIZE,
 		player_spawn_height,
@@ -232,13 +239,21 @@ func spawn_enemies() -> void:
 			spiders_remaining += 1
 
 		generated_root.add_child(enemy)
-		enemy.position = Vector3(
-			enemy_cell.x * TILE_SIZE,
-			0.0,
-			enemy_cell.y * TILE_SIZE
-		)
+		if enemy.get_meta("enemy_type") == "turret":
+			enemy.position = Vector3(
+				enemy_cell.x * TILE_SIZE,
+				0.0,
+				enemy_cell.y * TILE_SIZE
+			)
+		elif enemy.get_meta("enemy_type") == "spider":
+			enemy.position = Vector3(
+				enemy_cell.x * TILE_SIZE,
+				2.0,
+				enemy_cell.y * TILE_SIZE
+			)
 		enemy.tree_exited.connect(func(): _on_enemy_defeated(enemy))
-
+	GameManager.turrets_left = turrets_remaining
+	GameManager.spiders_left = spiders_remaining
 	print("Level ", current_level, " started! Turrets: ", turrets_remaining, " | Spiders: ", spiders_remaining)
 
 
@@ -252,8 +267,10 @@ func _on_enemy_defeated(enemy_node: Node3D) -> void:
 	if enemy_node.has_meta("enemy_type"):
 		if enemy_node.get_meta("enemy_type") == "turret":
 			turrets_remaining -= 1
+			GameManager.turrets_left = turrets_remaining
 		else:
 			spiders_remaining -= 1
+			GameManager.spiders_left = spiders_remaining
 
 	print("Enemy eliminated! Total left: ", enemies_remaining, " (Turrets: ", turrets_remaining, ", Spiders: ", spiders_remaining, ")")
 
@@ -262,6 +279,7 @@ func _on_enemy_defeated(enemy_node: Node3D) -> void:
 
 func advance_level() -> void:
 	current_level += 1
+	GameManager.current_level = current_level
 	print("ALL ENEMIES DEFEATED! Advancing to Level ", current_level)
 	
 	target_tiles += 5
@@ -318,7 +336,6 @@ func corrupt_materials() -> void:
 		# level 6: white checkers
 		if ResourceLoader.exists(corrupted_tex_path):
 			wall_mat.albedo_texture = load(corrupted_tex_path)
-		
 		wall_mat.albedo_color = Color(2.5, 1.978, 0.0, 1.0) # color goes here
 		print("Level 6: Texture shifted to white checkers.")
 		
