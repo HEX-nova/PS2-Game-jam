@@ -6,13 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://v7mgqx5k0h0e" path="res://Scenes/spider_cube.tscn" id="3_754fn"]
 [ext_resource type="PackedScene" uid="uid://fkj0enfbxmjn" path="res://Scenes/wall.tscn" id="3_wqkje"]
 [ext_resource type="PackedScene" uid="uid://h4nl5in3skkw" path="res://Scenes/pillar.tscn" id="4_0f350"]
-[ext_resource type="PackedScene" uid="uid://2hc3i84immwd" path="res://Scenes/cube_projectile.tscn" id="4_bvt00"]
 [ext_resource type="PackedScene" uid="uid://cg7gkoxwrrggn" path="res://Scenes/player.tscn" id="5_wqkje"]
 [ext_resource type="PackedScene" uid="uid://cq3f68hq5ysq4" path="res://Scenes/mui.tscn" id="7_8c0lf"]
+[ext_resource type="Material" uid="uid://bnrch0dks5dk8" path="res://Materials/Sky.tres" id="9_qxfql"]
 [ext_resource type="Texture2D" uid="uid://1g8vi7bfljlx" path="res://Sprites/game_jam_UI_health_energy_bar.png" id="10_oqgf2"]
 
+[sub_resource type="Sky" id="Sky_ldxhm"]
+sky_material = ExtResource("9_qxfql")
+radiance_size = 0
+
 [sub_resource type="Environment" id="Environment_htemk"]
+background_mode = 2
 background_color = Color(0.5368971, 0.65327245, 1, 1)
+sky = SubResource("Sky_ldxhm")
 ambient_light_source = 1
 ambient_light_color = Color(0.5135624, 0.59858924, 1, 1)
 ambient_light_sky_contribution = 0.1
@@ -53,12 +59,14 @@ region = Rect2(174.90784, 222.39514, 352.63055, 54.85605)
 
 [node name="Level" type="Node3D" unique_id=1470024260]
 script = ExtResource("1_tumq0")
+level_mode = 1
+time_remaining = 150.0
+time_gained_per_kill = 5.0
 size = Vector2i(20, 20)
 target_tiles = 100
 current_level = 1
 turret_scene = ExtResource("2_0f350")
 spider_scene = ExtResource("3_754fn")
-spider_projectiles = ExtResource("4_bvt00")
 enemy_count = 6
 tile_scene = ExtResource("2_81xng")
 wall_scene = ExtResource("3_wqkje")
