@@ -55,7 +55,8 @@ func _physics_process(delta: float) -> void:
 		shoot_timer += delta
 		if shoot_timer >= shoot_cooldown:
 			shoot_timer = 0.0
-			shoot_projectile()
+			if has_clear_shot():
+				shoot_projectile()
 
 
 func _on_enemy_defeated() -> void:
@@ -67,6 +68,12 @@ func shoot_projectile() -> void:
 		return
 
 	var proj = projectile_scene.instantiate() as Node3D
+	
+	if proj == null:
+		return
+
+	proj.set_shooter(self)
+
 	var spawn_node = $ProjectileSpawner if has_node("ProjectileSpawner") else self
 	get_tree().current_scene.add_child(proj)
 	proj.global_position = spawn_node.global_position
@@ -76,3 +83,20 @@ func shoot_projectile() -> void:
 		# Prevent look_at crash if vector is zero
 		if look_dir.length_squared() > 0.001:
 			proj.look_at(proj.global_position + look_dir.normalized(), Vector3.UP)
+
+func has_clear_shot() -> bool:
+	if not is_instance_valid(player):
+		return false
+
+	var spawn_node: Node3D = $ProjectileSpawner if has_node("ProjectileSpawner") else self
+
+	var query := PhysicsRayQueryParameters3D.create(
+		spawn_node.global_position,
+		player.global_position + Vector3.UP * 0.25,
+		0xFFFFFFFF,
+		[get_rid()]
+	)
+
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+
+	return hit.is_empty() or hit["collider"] == player

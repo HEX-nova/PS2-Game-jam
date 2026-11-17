@@ -20,7 +20,7 @@ func _ready() -> void:
 	lightning_damage = base_lightning_damage + 5 * GameManager.current_level
 	fire_interval = base_fire_interval + 0.1 * (GameManager.current_level - 1)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not target_player:
 		return
 
@@ -66,6 +66,9 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 func fire_lightning() -> void:
 	print("FIRING LIGHTNING!")
+	
+	if not has_clear_shot():
+		return
 
 	if not target_player:
 		print("NO TARGET!")
@@ -83,3 +86,23 @@ func fire_lightning() -> void:
 		target_player.global_position
 	)
 	GameManager.take_damage(lightning_damage)
+	
+
+func has_clear_shot() -> bool:
+	if not is_instance_valid(target_player):
+		return false
+
+	var excluded: Array[RID] = []
+	for child in find_children("*", "CollisionObject3D", true, false):
+		excluded.append(child.get_rid())
+
+	var query := PhysicsRayQueryParameters3D.create(
+		lightning_spawn.global_position,
+		target_player.global_position + Vector3.UP * 0.25,
+		0xFFFFFFFF,
+		excluded
+	)
+
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+
+	return hit.is_empty() or hit["collider"] == target_player
