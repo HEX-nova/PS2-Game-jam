@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://h4nl5in3skkw" path="res://Scenes/pillar.tscn" id="4_0f350"]
 [ext_resource type="PackedScene" uid="uid://cg7gkoxwrrggn" path="res://Scenes/player.tscn" id="5_wqkje"]
 [ext_resource type="PackedScene" uid="uid://cq3f68hq5ysq4" path="res://Scenes/mui.tscn" id="7_8c0lf"]
+[ext_resource type="PackedScene" uid="uid://dq00sa2otwrqu" path="res://Scenes/stairs.tscn" id="7_qxfql"]
 [ext_resource type="Material" uid="uid://bnrch0dks5dk8" path="res://Materials/Sky.tres" id="9_qxfql"]
 [ext_resource type="Texture2D" uid="uid://1g8vi7bfljlx" path="res://Sprites/game_jam_UI_health_energy_bar.png" id="10_oqgf2"]
 
@@ -59,11 +60,11 @@ region = Rect2(174.90784, 222.39514, 352.63055, 54.85605)
 
 [node name="Level" type="Node3D" unique_id=1470024260]
 script = ExtResource("1_tumq0")
-level_mode = 1
+level_mode = 2
 time_remaining = 150.0
 time_gained_per_kill = 5.0
 size = Vector2i(20, 20)
-target_tiles = 100
+target_tiles = 30
 current_level = 1
 turret_scene = ExtResource("2_0f350")
 spider_scene = ExtResource("3_754fn")
@@ -71,8 +72,9 @@ enemy_count = 6
 tile_scene = ExtResource("2_81xng")
 wall_scene = ExtResource("3_wqkje")
 pillar_scene = ExtResource("4_0f350")
+stair_scene = ExtResource("7_qxfql")
 player_scene = ExtResource("5_wqkje")
-player_spawn_height = 2.0
+player_spawn_height = 1.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2056044181]
 transform = Transform3D(1, 0, 0, 0, 0.57357645, 0.81915206, 0, -0.81915206, 0.57357645, 0, 0, 0)
